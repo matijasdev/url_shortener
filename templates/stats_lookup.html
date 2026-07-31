@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stats Lookup</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="card">
+
+    <a href="/" class="nav-btn">Home</a>
+
+    <h1>Check Stats</h1>
+    <div class="subtitle">Enter your short code or URL to view analytics</div>
+
+    {% if message %}
+    <div class="error">
+        <span>{{ message }}</span>
+    </div>
+    {% endif %}
+    <form action="/stats" method="GET">
+        <input type="text" name="query" placeholder="abc123 or https://..." required>
+        <button type="submit">Check</button>
+    </form>
+
+</div>
+
+</body>
+</html>

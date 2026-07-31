@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>URL Shortener</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="card">
+
+    <a href="{{ url_for('check_stats') }}" class="nav-btn">Stats</a>
+
+    <h1>URL Shortener</h1>
+    <div class="subtitle">Paste a long URL and generate a short link instantly.</div>
+
+    {% if message %}
+    <div class="error">
+        <span>{{ message }}</span>
+    </div>
+    {% endif %}
+
+    <form method="POST">
+        <input type="text" name="url"
+               placeholder="https://example.com/very/long/url"
+               required>
+
+        <button type="submit">Shorten</button>
+    </form>
+
+
+    {% if short_url %}
+
+    <div class="result">
+
+        <div class="result-label">Your short link</div>
+
+        <div class="url-box">
+            <div class="url-text" id="shortUrl">
+                {{ short_url }}
+            </div>
+
+            <button class="copy-btn" onclick="copyUrl(this)">Copy</button>
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+function copyUrl(btn) {
+    const text = document.getElementById("shortUrl").innerText;
+    navigator.clipboard.writeText(text);
+
+    btn.innerText = "Copied ✓";
+}
+</script>
+
+</body>
+</html>

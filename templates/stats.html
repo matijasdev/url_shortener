@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Stats</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="card">
+
+    <a href="/stats" class="nav-btn">Lookup</a>
+    <a href="/" class="nav-btn second">Home</a>
+
+    <h1>Link Stats</h1>
+    <div class="subtitle">Overview of your shortened URL performance</div>
+
+    <div class="stats-box">
+
+        <div class="stat-row">
+            <span>Original URL</span>
+            <span>{{ stats.original_url }}</span>
+        </div>
+
+        <div class="stat-row">
+            <span>Short URL</span>
+            <span>{{ short_url }}</span>
+        </div>
+
+        <div class="stat-row">
+            <span>Total Clicks</span>
+            <span>{{ stats.click_count }}</span>
+        </div>
+
+        <div class="stat-row">
+            <span>Created</span>
+            <span>{{ stats.created_at.strftime('%Y-%m-%d %H:%M') }}</span>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
