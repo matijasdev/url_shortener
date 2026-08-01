@@ -5,7 +5,7 @@ import validators
 from config import DOMAIN
 
 
-def create_code(url):
+def create_code(url: str) -> str|None:
     for _ in range(5):
         code = generate(size=6)
 
@@ -18,7 +18,7 @@ def create_code(url):
     return None
 
 
-def validate_url(url):
+def validate_url(url: str) -> str|None:
     if not url.startswith(("http://", "https://")):
         url = f"https://{url}"
 
@@ -28,17 +28,24 @@ def validate_url(url):
     return url
 
 
-def extract_code(url):
-    if DOMAIN in url:
+def extract_code(url: str) -> str:
+    if url.startswith(DOMAIN + "/"):
         url = url.removeprefix(DOMAIN + "/")
 
     return url
 
 
-def process_url(url):
+def valid_input_length(user_input: str, max_input_length: int) -> bool:
+    return len(user_input) <= max_input_length
+
+
+def process_url(url: str, max_input_length: int) -> str|None:
+    if not valid_input_length(url, max_input_length):
+        return None
+
     clean_url = validate_url(url)
 
-    if not clean_url:
+    if clean_url is None:
         return None
 
     code = create_code(clean_url)

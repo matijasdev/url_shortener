@@ -2,8 +2,8 @@ from flask import Flask, render_template, request, redirect
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 from queries import get_original_link, increment_click_count, get_stats
-from utils import process_url, extract_code
-from config import DOMAIN
+from utils import process_url, extract_code, valid_input_length
+from config import DOMAIN, MAX_INPUT_LENGTH
 from db import metadata, engine
 import models          # register tables
 
@@ -24,7 +24,7 @@ def home():
 
     url = request.form.get("url", "").strip()
 
-    short_url = process_url(url)
+    short_url = process_url(url, MAX_INPUT_LENGTH)
 
     if short_url is None:
         return render_template("index.html", message="Invalid URL"), 400
@@ -36,6 +36,9 @@ def home():
 @limiter.limit("50/minute")
 def check_stats():
     user_input = request.args.get("query", "").strip()
+
+    if not valid_input_length(user_input, MAX_INPUT_LENGTH):
+        return render_template("stats_lookup.html", message=f"Maximum input length is {MAX_INPUT_LENGTH} characters")
 
     code = extract_code(user_input)
 

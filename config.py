@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-DOMAIN = os.getenv("HOST_URL")
-DATABASE = os.getenv("DATABASE")
-SECRET_KEY = os.getenv("SECRET_KEY")
+DOMAIN: str = os.getenv("HOST_URL") # type: ignore
+DATABASE: str = os.getenv("DATABASE") # type: ignore
+SECRET_KEY: str = os.getenv("SECRET_KEY") # type: ignore
+MAX_INPUT_LENGTH: int = 4000

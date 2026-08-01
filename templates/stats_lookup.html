@@ -27,7 +27,7 @@
     </div>
     {% endif %}
     <form action="/stats" method="GET">
-        <input type="text" name="query" placeholder="abc123 or https://..." required>
+        <input type="text" name="query" placeholder="abc123 or https://..." required maxlength="4001">
         <button type="submit">Check</button>
     </form>
 
