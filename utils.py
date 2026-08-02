@@ -6,6 +6,11 @@ from config import DOMAIN
 
 
 def create_code(url: str) -> str|None:
+    """
+    Generate a random 6 character code and store the URL.
+
+    Returns None if a code can't be created after multiple attempts.
+    """
     for _ in range(5):
         code = generate(size=6)
 
