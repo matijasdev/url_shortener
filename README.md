@@ -54,7 +54,6 @@ Create a `.env` file with the required environment variables:
 ```env
 HOST_URL=http://localhost:5000
 DATABASE=your_database_url
-SECRET_KEY=your_secret_key
 ```
 
 Replace the values with your own configuration.
